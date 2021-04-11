@@ -15,5 +15,6 @@ check DB Settings in .env
 php artisan migrate
 php artisan key:generate
 php artisan storage:link
+php artisan passport:install
 php artisan serve
 ```
