@@ -14,7 +14,7 @@
                             <th>Category</th>
                             <th>Name</th>
                             <th>Stock</th>
-                            <th>Defective Stock</th>
+                            <th>minimal Stock</th>
                             <th>Base price</th>
                             <th>Average Price</th>
                             <th>Total sales</th>
@@ -26,7 +26,7 @@
                                 <td><a href="{{ route('categories.show', $product->category) }}">{{ $product->category->name }}</a></td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->stock }}</td>
-                                <td>{{ $product->stock_defective }}</td>
+                                <td>{{ $product->stock_min }}</td>
                                 <td>{{ format_money($product->price) }}</td>
                                 <td>{{ format_money($product->solds->avg('price')) }}</td>
                                 <td>{{ $product->solds->sum('qty') }}</td>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">

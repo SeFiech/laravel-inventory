@@ -47,27 +47,27 @@
                                     @include('alerts.feedback', ['field' => 'description'])
                                 </div>
                                 <div class="row">
-                                    <div class="col-4">                                    
+                                    <div class="col-4">
                                         <div class="form-group{{ $errors->has('stock') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-stock">Stock</label>
                                             <input type="number" name="stock" id="input-stock" class="form-control form-control-alternative" placeholder="Stock" value="{{ old('stock') }}" required>
                                             @include('alerts.feedback', ['field' => 'stock'])
                                         </div>
-                                    </div>                            
-                                    <div class="col-4">                                    
+                                    </div>
+                                    <div class="col-4">
                                         <div class="form-group{{ $errors->has('stock_defective') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-stock_defective">Defective Stock</label>
-                                            <input type="number" name="stock_defective" id="input-stock_defective" class="form-control form-control-alternative" placeholder="Defective Stock" value="{{ old('stock_defective') }}" required>
-                                            @include('alerts.feedback', ['field' => 'stock_defective'])
+                                            <label class="form-control-label" for="input-stock_defective">minimal Stock</label>
+                                            <input type="number" name="stock_min" id="input-stock_min" class="form-control form-control-alternative" placeholder="Minimal Stock" value="{{ old('stock_min') }}" required>
+                                            @include('alerts.feedback', ['field' => 'stock_min'])
                                         </div>
                                     </div>
-                                    <div class="col-4">                                    
+                                    <div class="col-4">
                                         <div class="form-group{{ $errors->has('price') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-price">Price</label>
                                             <input type="number" step=".01" name="price" id="input-price" class="form-control form-control-alternative" placeholder="Price" value="{{ old('price') }}" required>
                                             @include('alerts.feedback', ['field' => 'price'])
                                         </div>
-                                    </div>                            
+                                    </div>
                                 </div>
 
                                 <div class="text-center">

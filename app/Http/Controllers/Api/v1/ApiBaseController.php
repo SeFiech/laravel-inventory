@@ -7,35 +7,99 @@ use Illuminate\Http\Request;
 
 class ApiBaseController extends Controller
 {
-    public $successStatus = 200;
-    public $errorStatus = 401;
+    private $successStatus = 200;
+    private $errorStatus = 401;
+    private $serverError = 500;
 
-    private function sendRespose($data, $statusCode) {
-        return response()->json(['data' => $data], $statusCode, ['Content-Type' => 'application/json;charset=UTF-8'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    private $http_codes = array(
+        100 => 'Continue',
+        101 => 'Switching Protocols',
+        102 => 'Processing',
+        103 => 'Checkpoint',
+        200 => 'OK',
+        201 => 'Created',
+        202 => 'Accepted',
+        203 => 'Non-Authoritative Information',
+        204 => 'No Content',
+        205 => 'Reset Content',
+        206 => 'Partial Content',
+        207 => 'Multi-Status',
+        300 => 'Multiple Choices',
+        301 => 'Moved Permanently',
+        302 => 'Found',
+        303 => 'See Other',
+        304 => 'Not Modified',
+        305 => 'Use Proxy',
+        306 => 'Switch Proxy',
+        307 => 'Temporary Redirect',
+        400 => 'Bad Request',
+        401 => 'Unauthorized',
+        402 => 'Payment Required',
+        403 => 'Forbidden',
+        404 => 'Not Found',
+        405 => 'Method Not Allowed',
+        406 => 'Not Acceptable',
+        407 => 'Proxy Authentication Required',
+        408 => 'Request Timeout',
+        409 => 'Conflict',
+        410 => 'Gone',
+        411 => 'Length Required',
+        412 => 'Precondition Failed',
+        413 => 'Request Entity Too Large',
+        414 => 'Request-URI Too Long',
+        415 => 'Unsupported Media Type',
+        416 => 'Requested Range Not Satisfiable',
+        417 => 'Expectation Failed',
+        418 => 'I\'m a teapot',
+        422 => 'Unprocessable Entity',
+        423 => 'Locked',
+        424 => 'Failed Dependency',
+        425 => 'Unordered Collection',
+        426 => 'Upgrade Required',
+        449 => 'Retry With',
+        450 => 'Blocked by Windows Parental Controls',
+        500 => 'Internal Server Error',
+        501 => 'Not Implemented',
+        502 => 'Bad Gateway',
+        503 => 'Service Unavailable',
+        504 => 'Gateway Timeout',
+        505 => 'HTTP Version Not Supported',
+        506 => 'Variant Also Negotiates',
+        507 => 'Insufficient Storage',
+        509 => 'Bandwidth Limit Exceeded',
+        510 => 'Not Extended'
+    );
+
+
+    public function sendRespose($data, $statusCode) {
+        //return response()->json(['data' => $data], $statusCode, ['Content-Type' => 'application/json;charset=UTF-8'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return response()->json($data, $statusCode, ['Content-Type' => 'application/json;charset=UTF-8'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
-    public function sendError(\Exception $e)
+
+
+    public function sendCatchError(\Exception $e)
     {
         $data['status'] = false;
-        $statusCode = $this->errorStatus;
+        $statusCode = $this->http_codes['500'];
         $data['code'] = $statusCode;
         $data['msg'] = $e->getTraceAsString();
         return $this->sendRespose($data, $statusCode);
     }
 
-    public function sendFailMessage($msg)
-    {
-        $data['status'] = false;
-        $data['code'] = $this->errorStatus;
-        $data['msg'] = $msg;
-        return $this->sendRespose($data, $this->errorStatus);
-    }
+    // public function sendFailMessage($msg)
+    // {
+    //     $data['status'] = false;
+    //     $data['code'] = $this->serverError;
+    //     $data['msg'] = $msg;
+    //     return $this->sendRespose($data, $this->serverError);
+    // }
 
-    public function sendSuccessData($data)
-    {
-        $data['status'] = true;
-        $data['code'] = $this->successStatus;
-        $data['msg'] = $data;
-        return $this->sendRespose($data, $this->successStatus);
-    }
+    // public function sendSuccessData($msg)
+    // {
+    //     $data['status'] = true;
+    //     $data['code'] = $this->successStatus;
+    //     $data['msg'] = $msg;
+    //     return $this->sendRespose($data, $this->successStatus);
+    // }
 }

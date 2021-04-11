@@ -16,8 +16,8 @@ class UpdateProductsTable extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('stock_defective');
             $table->unsignedinteger('stock_min')->default(0);
-            $table->unsignedBigInteger('locations_id');
-            $table->foreign('locations_id')->references('id')->on('locations');
+            // $table->unsignedBigInteger('locations_id');
+            // $table->foreign('locations_id')->references('id')->on('locations');
 
         });
     }

@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
         'transactions/transfer' => 'TransferController',
         'methods' => 'MethodController',
     ]);
-    
+
     Route::resource('transactions', 'TransactionController')->except(['create', 'show']);
     Route::get('transactions/stats/{year?}/{month?}/{day?}', ['as' => 'transactions.stats', 'uses' => 'TransactionController@stats']);
     Route::get('transactions/{type}', ['as' => 'transactions.type', 'uses' => 'TransactionController@type']);
